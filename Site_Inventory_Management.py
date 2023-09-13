@@ -15,9 +15,9 @@ import json
 import os
 
 print("This is a product of Infinite Solutions")
-print('Incase of any queries contact ryangacherubusiness@outlook.com' + '\n')
+print('Incase of any queries contact Provider' + '\n')
 
-site_names = ['A','B','C']
+site_names = ['Site A','Site B','Site C','Site D']
 site_inventories = {site_name: {} for site_name in site_names}
 
 def update_add_site():
@@ -35,57 +35,104 @@ def update_add_site():
     print("Updating means increasing or reducing the qty of an existing item." + '\n')
     
     ositem         = selected_site 
-    site_inventory = site_inventories[selected_site]
+    
     ans            = input('Would you like to add or update:')
     print(f"Managing inventory for {selected_site} on {current_date}")
     
-    if ans.lower() == 'add':
-        nitems  = int(input('Enter the no of items to be added:'))
-    
-        for i in range(nitems):
-            oitem        = input("Enter the item to be stored:")
-            if oitem not in site_inventory:
-                site_inventory[oitem] = int(input(f'Enter the no of {oitem} to be added to site store:'))
-                save_file = f'{selected_site}_inventory.json'
-                with open(save_file, 'w') as file:
-                    json.dump(site_inventory,file)
-            else:
-                 print(f"{oitem} is already stored in the dictionary.")    
-        print(f'For the {ositem} site the inventory is:')        
-        print(f'Total Site Inventory As at {current_date} : {site_inventory}')
+    def Ans():
+        site_inventory = site_inventories[selected_site]
+        if ans.lower() == 'add':
+            nitems  = int(input('Enter the no of items to be added:'))
+            load_filename = f"{selected_site}_inventory.json"
+            if os.path.exists(load_filename):
+                with open(load_filename, 'r') as file:
+                    site_inventory.update(json.load(file))
+                print(f'Inventory loaded from {load_filename}')
             
-    elif ans.lower() == 'update':
-        ans2 = input('Would you like to add or subtract:')
-        
-        if ans2.lower() == 'subtract':
-            n_updates = input('Enter the item to be updated:')
-            if n_updates in site_inventory:
-                x = int(input(f'Enter the no of {n_updates} being taken from the site'))
-                site_inventory[n_updates] -= x
+            for i in range(nitems):
+                oitem        = input("Enter the item to be stored:")
+                if oitem not in site_inventory:
+                    site_inventory[oitem] = int(input(f'Enter the no of {oitem} to be added to site store:'))
+                    
+                else:
+                     print(f"{oitem} is already stored in the dictionary.")
+                     
+            # Save the updated inventory to file
+            with open(load_filename, 'w') as file:
+                json.dump(site_inventory, file)
+            print('The Tool Addition was Successful.')
+            print(f'For the {ositem} site the inventory is:')
+            print(f'Total Site Inventory As at {current_date} : {site_inventory}')
                 
-                print(f'{x} {n_updates}s taken from site')
-                print(f'New Total Site Inventory {site_inventory}')
+        elif ans.lower() == 'update':
+            ans2 = input('Would you like to add or subtract:')
+            
+            if ans2.lower() == 'subtract':
                 load_filename = f"{selected_site}_inventory.json"
                 if os.path.exists(load_filename):
-                      with open(load_filename, 'r') as file:
-                           dict1 = json.load(file)
-                      print(f'Inventory loaded from {load_filename}')
+                    with open(load_filename, 'r') as file:
+                        site_inventory.update(json.load(file))
+                        print(site_inventory)
+                        print(f'Inventory loaded Successfully from: {load_filename}')
+                        n_updates  = input('Enter the item in store to be updated: ')
+                        if n_updates in site_inventory:
+                            x     = int(input(f'Enter the no of {n_updates} to be removed from site store:'))
+                            site_inventory[n_updates] -= x
+                            print(f'{x} {n_updates} added to site.')
+                            print(f'New Total Inventory for {selected_site} Site:{site_inventory}.')
+                        else:
+
+                            print(f"{n_updates} is not stored in {selected_site} Inventory.")
+
                 else:
-                     print(f'No previous inventory data found for {selected_site}')
-            else:
-                print(f"{n_updates} is not stored in {selected_site} Inventory.")
+                        print('File does not exist.')
+                        y = os.path.exists(load_filename)
+                        print(f'Result of os.path.exists: {y}')
+                with open(load_filename, 'w') as file:
+                    json.dump(site_inventory, file)
+                print('The Tool Update Subtraction was Successful.')
+                print(f'For the {ositem} site the inventory is:')
+                print(f'Total Site Inventory As at {current_date} : {site_inventory}')
+              
+            
+        
+            elif ans2.lower() == 'add':
+                load_filename = f"{selected_site}_inventory.json"
+                if os.path.exists(load_filename):
+                    with open(load_filename, 'r') as file:
+                        site_inventory.update(json.load(file))
+                       
+                        print(f'Inventory loaded Successfully from: {load_filename}')
+                        print(site_inventory)
+                        n_updates  = input('Enter the item in store to be updated: ')
+                        if n_updates in site_inventory:
+                            x     = int(input(f'Enter the no of {n_updates} to be added to site store:'))
+                            site_inventory[n_updates] += x
+                            print(f'{x} {n_updates} added to site.')
+                            print(f'New Total Inventory for {selected_site} Site:{site_inventory}.')
+                        else:
+                            print(f"{n_updates} is not stored in {selected_site} Inventory.")
                 
-        elif ans2.lower() == 'add':
-            n_updates = input('Enter the item to be updated:')
-            if n_updates in dict1:
-                x = int(input(f'Enter the no of {n_updates} being added to the site'))
-                dict1[n_updates] += x
-                print(f'{x} {n_updates}s added to site')
-                print(f'New Total Site Inventory {dict1}')
+                else:
+                        print('File does not exist.')
+                        y = os.path.exists(load_filename)
+                        print(f'Result of os.path.exists: {y}')
+                
+                # Save the updated inventory to file
+                with open(load_filename, 'w') as file:
+                    json.dump(site_inventory, file)
+                print('The Tool Upate Addition was Successful.')
+                print(f'For the {ositem} site the inventory is:')
+                print(f'Total Site Inventory As at {current_date} : {site_inventory}')
+                
+               
+                            
+                        
+                
             else:
-                print(f"{n_updates} is not stored in {selected_site} Inventory.")
-        else:
-            print("Invalid choice.")
+                print("Invalid choice.")
+                
+    Ans()
        
 update_add_site()        
         
