@@ -22,4 +22,4 @@ for file in folder:
     else:
          print('Operation not working.')
          print(f'The status code:{response.status_code}')
-         print(response.text[:150] 
+         print(response.text[:150])
