@@ -15,7 +15,7 @@ for file in folder:
              if keycount < len(keys):
                       fb[keys[keycount]] = value
                       keycount          +=  1
-    response = requests.post("http://34.171.24.212/feedback/", json=fb)
+    response = requests.post("http://34.171.24.000/feedback/", json=fb)
     if response.status_code == 201:
        print('Successful')
        print(f'The  staus code is:{response.status_code}') 
