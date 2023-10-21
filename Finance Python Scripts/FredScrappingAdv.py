@@ -1,10 +1,7 @@
 import numpy             as np
-import pandas            as pd
 import pandas_datareader as wb
 import matplotlib.pyplot as plt
 import datetime          as dt
-import array             as arr
-import statistics        as st
 from   functools     import lru_cache
 
 while True:
