@@ -8,8 +8,6 @@ if os.path.exists(path):
         folder = os.listdir(path)
         for file in folder:
              print(file)
-       
-    
 else:
-    print(f"{folder} isn't a valid drirectory")
+    print(f"{path} isn't a valid drirectory")
 
