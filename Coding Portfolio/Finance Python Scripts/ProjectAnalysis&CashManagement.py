@@ -56,9 +56,11 @@ class CManagement:
     def BaumolModel(self):
         OptCash = np.sqrt((2 * self.costpt * self.tcash) / self.oppc)
         return 'The optimum Amount Of cash under the Baumol Model is:{}'.format(round(OptCash, 2))
+print("Welcome to Financial Analysis Tool!")
+print("This program allows you to perform Cash Management and Project Analysis.")
+print("Choose between 'Cash Management' or 'Project Analysis' to get started.")
 
-print('Current Features are Cash Management & Project Analysis')
-ans = input('Which Analysis is being undertaken:')
+ans = input("Which analysis is being undertaken: ")
 
 if ans.lower() == 'cash management':
     cashm = CManagement(float(input('Enter the Cost Per Transaction:')),
