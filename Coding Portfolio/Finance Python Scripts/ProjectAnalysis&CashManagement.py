@@ -69,13 +69,23 @@ elif ans.lower() == 'project analysis':
     print('Class Options are:Annuity & NtAnnuity')
     prj2 = input('Enter the class of the Project:')
     if prj2.lower() == 'annuity':
-        prj2 = NPVA(int(input('Enter the no.of years:')),
+       try:
+            prj2 = NPVA(int(input('Enter the no.of years:')),
                     int(input('Enter the cost of the project:')),
                     float(input('Enter the rate:')),
                     int(input('Enter the Annual CashFlow:')))
-        prj2.npva()
+            prj2.npva()
+       except ValueError:
+           print('Invalid input. Please enter numeric values for years, cost, rate, and cash flow.')
+
     elif prj2.lower() == 'ntannuity':
-        prj2 = NPVNA(int(input('Enter the no.of years:')),
+        try:
+            prj2 = NPVNA(int(input('Enter the no.of years:')),
                      int(input('Enter the cost of the project:')),
                      float(input('Enter the rate:')))
-        prj2.npvna()
+            prj2.npvna()
+        except ValueError:
+            print('Invalid input. Please enter numeric values for years, cost, rate, and cash flow.')
+    else:
+        print('Invalid Selection. Please choose either "Annuity" or "NtAnnuity".')
+        
