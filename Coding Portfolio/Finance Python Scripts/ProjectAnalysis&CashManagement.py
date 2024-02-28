@@ -13,7 +13,7 @@ class NPVA:
         pi = (self.cflow * ((1 - pow((1 + self.rate), (-self.years))) / self.rate)) / self.cost
         PI = round(pi, 3)
         print('The NPV for the project is:', round(npva, 2))
-        print('The Profitabiity Index is:', PI)
+        print('The Profitability Index is:', PI)
 
 class NPVNA:
     def __init__(self, years, cost, rate, cflow):
