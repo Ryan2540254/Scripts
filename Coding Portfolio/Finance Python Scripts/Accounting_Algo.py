@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Accounting Program
+
+This script allows users to manage financial records by capturing expenses and revenues. 
+It provides options for entering data, performing analyses, and conducting transaction-level and full analyses.
+
+"""
 import csv
 import decimal
 from   datetime import datetime
